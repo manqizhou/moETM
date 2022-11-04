@@ -1,6 +1,6 @@
 ## Learning single-cell multi-omic signature of gene regulatory programs by deep embedding topic model
 
-Please contact (mz335@cornell.edu or xxx) if you have any questions or suggestions.
+Please contact (mz335@cornell.edu or zhanghao.duke@gmail.com or yueli@cs.mcgill.ca or few2001@med.cornell.edu) if you have any questions or suggestions.
 
 ![model](./model.png?raw=true "Title")
 
@@ -29,7 +29,7 @@ git clone https://github.com/manqizhou/moETM.git
 ## Run
 1. Please run the main function: main_moETM.py
 
-2. I uploaded two datasets: BMMC(nips) and mouse_skin(MSLAC)
-NIPS dataset has multiple batches, so moETM has bias correction term. 
-MS dataset has 1 batch, so moETM do not have correction term.
+2. The code contains two examples: nips (BMMC) and mouse_skin (MSLAC) datastets.
+  BMMC dataset has multiple batches, so moETM has bias correction term. 
+  MSLAC dataset has 1 batch, so moETM do not have correction term.
 

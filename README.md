@@ -65,8 +65,8 @@ moETM requires cell-by-feature matrices as input, where feature could be gene, p
 
 Please run the main script `main_integration_.py` and edit data path accordingly.
 
-For the gene + protein case, please refer to [`main_integration_rna_protein.py`](/main_integration_rna_protein.py) for details. 
-For the gene + peak case, please refer to [`main_integration_rna_atac.py`](/main_integration_rna_atac.py) for details.
+For the gene + protein case, please refer to [`main_integration_rna_protein.py`](moETM/main_integration_rna_protein.py) for details. 
+For the gene + peak case, please refer to [main_integration_rna_atac.py](moETM/main_integration_rna_atac.py) for details.
 
 ### Imputation 
 

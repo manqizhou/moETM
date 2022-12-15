@@ -19,6 +19,7 @@ from sklearn.neighbors import NearestNeighbors
 import psutil
 import scib
 
+
 _cpu_count: Union[None, int] = psutil.cpu_count(logical=False)
 if _cpu_count is None:
     _cpu_count: int = psutil.cpu_count(logical=True)

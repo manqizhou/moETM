@@ -63,14 +63,14 @@ moETM requires cell-by-feature matrices as input, where feature could be gene, p
 
 ### Integration
 
-Please run the main script `main_integration_.py` and edit data path accordingly.
+Please run the main script `main_integration_*.py` and edit data path accordingly.
 
 For the gene + protein case, please refer to `main_integration_rna_protein.py` for details. 
 For the gene + peak case, please refer to `main_integration_rna_atac.py` for details.
 
 ### Imputation 
 
-please refer to `main_cross_prediction_rna_atac.py` and `main_cross_prediction_rna_protein.py` for details. The two scripts are the same during training but different in the data preparation part.
+Please refer to `main_cross_prediction_rna_atac.py` and `main_cross_prediction_rna_protein.py` for details. The two scripts are the same during training but different in the data preparation part.
 
 ### Inclusion of prior pathway knowledge
 

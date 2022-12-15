@@ -14,7 +14,7 @@ Please contact (mz335@cornell.edu or zhanghao.duke@gmail.com or yueli@cs.mcgill.
 	- [Data Preparation](#data-preparation)
 	- [Integration](#moetm)
 	- [Imputation](#imputation)
-	- [Inclusion of prior pathway knowledge](#adding-prior-pathway-knowledge)
+	- [Inclusion of prior pathway knowledge](#inclusion-of-prior-pathway-knowledge)
 - [Downstream analysis](#downstream-analysis)
 
 ## Model Overview
@@ -59,26 +59,26 @@ There were 7 public datasets included in this study for performance evaluation a
 
 ### Data preparation
 
-moETM requires cell-by-feature matrices as input, where feature could be gene, protein, or peak. The input data is in 'AnnData' format and is loaded and preprocessed by the 'load_*_dataset()' and 'prepare_*_dataset()' functions in the 'dataloader.py' script. Before putting into the model, all matrices are column normalized by dividing the column sum.
+moETM requires cell-by-feature matrices as input, where feature could be gene, protein, or peak. The input data is in `AnnData` format and is loaded and preprocessed by the `load_*_dataset()` and `prepare_*_dataset()` functions in the `dataloader.py` script. Before putting into the model, all matrices are column normalized by dividing the column sum.
 
 ### Integration
 
-Please run the main script 'main_*.py' and edit data path accordingly.
+Please run the main script `main_integration_.py` and edit data path accordingly.
 
-For the gene + protein case, please refer to 'main_integration_rna_protein.py' for details. 
-For the gene + peak case, please refer to 'main_integration_rna_atac.py' for details.
+For the gene + protein case, please refer to `main_integration_rna_protein.py` for details. 
+For the gene + peak case, please refer to `main_integration_rna_atac.py` for details.
 
 ### Imputation 
 
-please refer to 'main_cross_prediction_rna_atac.py' and 'main_cross_prediction_rna_protein.py' for details. The two scripts are the same during training but different in the data preparation part.
+please refer to `main_cross_prediction_rna_atac.py` and `main_cross_prediction_rna_protein.py` for details. The two scripts are the same during training but different in the data preparation part.
 
 ### Inclusion of prior pathway knowledge
 
 moETM can use prior pathway knoeledge information by adding a pathway-by-gene matrix in the encoder. We downloaded pathways from [MSgiDB](https://www.gsea-msigdb.org/gsea/msigdb/human/collections.jsp), and selected the C7: immunologic signature gene sets. We kept pathways that contain more than 5 and fewer than 100 genes.
 
-Please refer to 'main_integration_rna_atac_use_pathway.py' for details.
+Please refer to `main_integration_rna_atac_use_pathway.py` for details.
 
 ## Downstream analysis
 
-Scripts that are used to do downstream analysis or plotting are included in the 'downstream_analysis' folder.
+Scripts that are used to do downstream analysis or plotting are included in the `downstream_analysis` folder.
 

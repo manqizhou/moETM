@@ -1,5 +1,3 @@
-
-
 from moETM.train import Trainer_moETM_pathway, Train_moETM
 from dataloader import load_nips_rna_atac_dataset_with_pathway, prepare_nips_dataset, data_process_moETM
 from moETM.build_model import build_moETM_pathway
@@ -47,9 +45,10 @@ num_batch = len(batch_index_train_T.unique())
 input_dim_mod1 = X_mod1_train_T.shape[1]
 input_dim_mod2 = X_mod2_train_T.shape[1]
 train_num = X_mod1_train_T.shape[0]
+emd_dim = gene_pathway.shape[0]
 
 num_topic = 100
-emd_dim = 400
+#emd_dim = 400
 encoder_mod1, encoder_mod2, decoder, optimizer = build_moETM_pathway(input_dim_mod1, input_dim_mod2, num_batch, num_topic=num_topic, emd_dim=emd_dim)
 
 alpha_mod_gene = torch.tensor(gene_pathway, dtype=torch.float32).T.cuda()

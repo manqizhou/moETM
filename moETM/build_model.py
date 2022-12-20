@@ -57,7 +57,7 @@ class decoder(nn.Module):
 
 class decoder_pathway(nn.Module):
     def __init__(self, mod1_dim, mod2_dim, z_dim, emd_dim, num_batch):
-        super(decoder, self).__init__()
+        super(decoder_pathway, self).__init__()
 
         self.alpha_mod2 = nn.Parameter(torch.randn(mod2_dim, emd_dim))
         self.beta = nn.Parameter(torch.randn(z_dim, emd_dim))

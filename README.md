@@ -44,11 +44,13 @@ mkdir Trained_model
 ```
 moETM requires several dependencies:
 
-* [python](https://www.python.org) 
-* [PyTorch](https://pytorch.org/) 
-* [scanpy](https://scanpy.readthedocs.io/en/stable/) 
-* [anndata](https://anndata.readthedocs.io/en/latest/) 
-
+* [python==3.9.5](https://www.python.org) 
+* [PyTorch==1.11.0+cu102](https://pytorch.org/) 
+* [scanpy==1.9.1](https://scanpy.readthedocs.io/en/stable/) 
+* [anndata==0.8.0](https://anndata.readthedocs.io/en/latest/) 
+* [pandas==1.3.4]
+* [numpy==1.21.4]
+* [scipy==1.7.1]
 
 ## Datasets
 

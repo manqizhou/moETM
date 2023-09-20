@@ -48,9 +48,9 @@ moETM requires several dependencies:
 * [PyTorch==1.11.0+cu102](https://pytorch.org/) 
 * [scanpy==1.9.1](https://scanpy.readthedocs.io/en/stable/) 
 * [anndata==0.8.0](https://anndata.readthedocs.io/en/latest/) 
-* [pandas==1.3.4]
-* [numpy==1.21.4]
-* [scipy==1.7.1]
+* [pandas==1.3.4](https://pandas.pydata.org/pandas-docs/version/1.3.4/)
+* [numpy==1.21.4](https://numpy.org/doc/stable/release/1.21.4-notes.html)
+* [scipy==1.7.1](https://pypi.org/project/scipy/1.7.1/)
 
 ## Datasets
 

@@ -35,6 +35,13 @@ Git clone a copy of code:
 ```
 git clone https://github.com/manqizhou/moETM.git
 ```
+Create folders to store results:
+```
+mkdir data
+mkdir result_fig
+mkdir Result
+mkdir Trained_model
+```
 moETM requires several dependencies:
 
 * [python](https://www.python.org) 
@@ -74,7 +81,7 @@ Please refer to `main_cross_prediction_rna_atac.py` and `main_cross_prediction_r
 
 ### Inclusion of prior pathway knowledge
 
-moETM can use prior pathway knoeledge information by adding a pathway-by-gene matrix in the encoder. We downloaded pathways from [MSgiDB](https://www.gsea-msigdb.org/gsea/msigdb/human/collections.jsp), and selected the C7: immunologic signature gene sets. We kept pathways that contain more than 5 and fewer than 100 genes.
+moETM can use prior pathway knowledge information by adding a pathway-by-gene matrix in the encoder. We downloaded pathways from [MSgiDB](https://www.gsea-msigdb.org/gsea/msigdb/human/collections.jsp), and selected the C7: immunologic signature gene sets. We kept pathways that contain more than 5 and fewer than 100 genes.
 
 Please refer to `main_integration_rna_atac_use_pathway.py` for details.
 

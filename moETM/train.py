@@ -7,6 +7,7 @@ import time
 from utils import calc_weight
 from eval_utils import evaluate
 import scipy
+import scipy.io as sio
 import pandas as pd
 
 def toogle_grad(model, requires_grad):
@@ -659,6 +660,14 @@ def Train_moETM_for_cross_prediction(trainer, Total_epoch, train_num, batch_size
 
             else:
                 print('Wrong Direction!')
+
+            ### save impute results
+            if (epoch%100==0):
+                np.save('./recon/recon_mod_epoch'+str(epoch)+'.npy',recon_mod)
+                sio.savemat('./recon/recon_mod_epoch'+str(epoch)+'.mat',{'recon':recon_mod})
+                np.save('./recon/gt_mod_epoch'+str(epoch)+'.npy',gt_mod)
+                sio.savemat('./recon/gt_mod_epoch'+str(epoch)+'.mat',{'gt':gt_mod})
+
 
             recon_mod_tmp = np.squeeze(recon_mod.reshape([1, -1]))
             gt_mod_tmp = np.squeeze(gt_mod.reshape([1, -1]))

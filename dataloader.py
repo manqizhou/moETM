@@ -105,7 +105,7 @@ def prepare_nips_dataset(adata_gex, adata_mod2,
     return adata_gex, adata_mod2
 
 def data_process_moETM(adata_mod1, adata_mod2):
-
+    # train/test on the whole
     train_adata_mod1 = adata_mod1
     train_adata_mod2 = adata_mod2
 
@@ -125,6 +125,117 @@ def data_process_moETM(adata_mod1, adata_mod2):
     del X_mod1, X_mod2, batch_index
 
     return X_mod1_train_T, X_mod2_train_T, batch_index_train_T, train_adata_mod1
+
+def data_process_moETM_split(adata_mod1, adata_mod2, n_sample, test_ratio=0.1):
+    ###### random split for training and testing
+    from sklearn.utils import resample
+    Index = np.arange(0, n_sample)
+    train_index = resample(Index, n_samples=int(n_sample*(1-test_ratio)), replace=False)
+    test_index = np.array(list(set(range(n_sample)).difference(train_index)))
+
+    train_adata_mod1 = adata_mod1[train_index]
+    obs = train_adata_mod1.obs
+    X = train_adata_mod1.X
+    train_adata_mod1 = ad.AnnData(X=X, obs=obs)
+
+    train_adata_mod2 = adata_mod2[train_index]
+    obs = train_adata_mod2.obs
+    X = train_adata_mod2.X
+    train_adata_mod2 = ad.AnnData(X=X, obs=obs)
+
+    test_adata_mod1 = adata_mod1[test_index]
+    obs = test_adata_mod1.obs
+    X = test_adata_mod1.X
+    test_adata_mod1 = ad.AnnData(X=X, obs=obs)
+
+    test_adata_mod2 = adata_mod2[test_index]
+    obs = test_adata_mod2.obs
+    X = test_adata_mod2.X
+    test_adata_mod2 = ad.AnnData(X=X, obs=obs)
+
+    ########################################################
+    # Training dataset
+    X_mod1 = np.array(train_adata_mod1.X.todense())
+    X_mod2 = np.array(train_adata_mod2.X.todense())
+    batch_index = np.array(train_adata_mod1.obs['batch_indices'])
+
+    X_mod1 = X_mod1 / X_mod1.sum(1)[:, np.newaxis]
+    X_mod2 = X_mod2 / X_mod2.sum(1)[:, np.newaxis]
+
+    X_mod1_train_T = torch.from_numpy(X_mod1).float()
+    X_mod2_train_T = torch.from_numpy(X_mod2).float()
+    batch_index_train_T = torch.from_numpy(batch_index).to(torch.int64).cuda()
+
+    # Testing dataset
+    X_mod1 = np.array(test_adata_mod1.X.todense())
+    X_mod2 = np.array(test_adata_mod2.X.todense())
+    batch_index = np.array(test_adata_mod1.obs['batch_indices'])
+
+    X_mod1 = X_mod1 / X_mod1.sum(1)[:, np.newaxis]
+    X_mod2 = X_mod2 / X_mod2.sum(1)[:, np.newaxis]
+
+    X_mod1_test_T = torch.from_numpy(X_mod1).float()
+    X_mod2_test_T = torch.from_numpy(X_mod2).float()
+    batch_index_test_T = torch.from_numpy(batch_index).to(torch.int64)
+
+    del X_mod1, X_mod2, batch_index
+
+    return X_mod1_train_T, X_mod2_train_T, batch_index_train_T, X_mod1_test_T, X_mod2_test_T, batch_index_test_T, test_adata_mod1
+
+def data_process_moETM_leave_one_batch(adata_mod1, adata_mod2, batch_index_as_test):
+    #leave one batch for testing
+    train_index = (adata_mod1.obs['batch_indices'] != batch_index_as_test)
+    test_index = (adata_mod1.obs['batch_indices'] == batch_index_as_test)
+
+    train_adata_mod1 = adata_mod1[train_index]
+    obs = train_adata_mod1.obs
+    X = train_adata_mod1.X
+    train_adata_mod1 = ad.AnnData(X=X, obs=obs)
+
+    train_adata_mod2 = adata_mod2[train_index]
+    obs = train_adata_mod2.obs
+    X = train_adata_mod2.X
+    train_adata_mod2 = ad.AnnData(X=X, obs=obs)
+
+    test_adata_mod1 = adata_mod1[test_index]
+    obs = test_adata_mod1.obs
+    X = test_adata_mod1.X
+    test_adata_mod1 = ad.AnnData(X=X, obs=obs)
+
+    test_adata_mod2 = adata_mod2[test_index]
+    obs = test_adata_mod2.obs
+    X = test_adata_mod2.X
+    test_adata_mod2 = ad.AnnData(X=X, obs=obs)
+
+    ########################################################
+    # Training dataset
+    X_mod1 = np.array(train_adata_mod1.X.todense())
+    X_mod2 = np.array(train_adata_mod2.X.todense())
+    batch_index = np.array(train_adata_mod1.obs['batch_indices'])
+
+    X_mod1 = X_mod1 / X_mod1.sum(1)[:, np.newaxis]
+    X_mod2 = X_mod2 / X_mod2.sum(1)[:, np.newaxis]
+
+    X_mod1_train_T = torch.from_numpy(X_mod1).float()
+    X_mod2_train_T = torch.from_numpy(X_mod2).float()
+    batch_index_train_T = torch.from_numpy(batch_index).to(torch.int64).cuda()
+
+    # Testing dataset
+    X_mod1 = np.array(test_adata_mod1.X.todense())
+    X_mod2 = np.array(test_adata_mod2.X.todense())
+    batch_index = np.array(test_adata_mod1.obs['batch_indices'])
+
+    X_mod1 = X_mod1 / X_mod1.sum(1)[:, np.newaxis]
+    X_mod2 = X_mod2 / X_mod2.sum(1)[:, np.newaxis]
+
+    X_mod1_test_T = torch.from_numpy(X_mod1).float()
+    X_mod2_test_T = torch.from_numpy(X_mod2).float()
+    batch_index_test_T = torch.from_numpy(batch_index).to(torch.int64)
+
+    del X_mod1, X_mod2, batch_index
+
+    return X_mod1_train_T, X_mod2_train_T, batch_index_train_T, X_mod1_test_T, X_mod2_test_T, batch_index_test_T, test_adata_mod1, train_adata_mod1
+
 
 def data_process_moETM_cross_prediction(adata_mod1, adata_mod2, n_sample):
     from sklearn.utils import resample

@@ -213,6 +213,11 @@ def data_process_moETM_leave_one_batch(adata_mod1, adata_mod2, batch_index_as_te
     X_mod2 = np.array(train_adata_mod2.X.todense())
     batch_index = np.array(train_adata_mod1.obs['batch_indices'])
 
+    ##convert batch index
+    batch_mapping = {batch: i for i, batch in enumerate(set(batch_index))}
+    mapped_index = np.array([batch_mapping[batch] for batch in batch_index])
+    batch_index = mapped_index
+    
     X_mod1 = X_mod1 / X_mod1.sum(1)[:, np.newaxis]
     X_mod2 = X_mod2 / X_mod2.sum(1)[:, np.newaxis]
 
@@ -225,6 +230,11 @@ def data_process_moETM_leave_one_batch(adata_mod1, adata_mod2, batch_index_as_te
     X_mod2 = np.array(test_adata_mod2.X.todense())
     batch_index = np.array(test_adata_mod1.obs['batch_indices'])
 
+    ##convert batch index
+    batch_mapping = {batch: i for i, batch in enumerate(set(batch_index))}
+    mapped_index = np.array([batch_mapping[batch] for batch in batch_index])
+    batch_index = mapped_index
+    
     X_mod1 = X_mod1 / X_mod1.sum(1)[:, np.newaxis]
     X_mod2 = X_mod2 / X_mod2.sum(1)[:, np.newaxis]
 

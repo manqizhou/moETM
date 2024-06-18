@@ -1,6 +1,6 @@
 # moETM: Learning single-cell multi-omic signature of gene regulatory programs by deep embedding topic model
 
-moETM integrates multiomics data across different experiments or studies with interpretable latent embeddings.
+moETM integrates multiomics data across different experiments or studies with interpretable latent embeddings. For more information, please refer to our [publication](https://www.cell.com/cell-reports-methods/pdf/S2667-2375(23)00207-2.pdf) and [protocol](https://www.sciencedirect.com/science/article/pii/S2666166724002314).
 
 Please contact (mz335@cornell.edu or zhanghao.duke@gmail.com or yueli@cs.mcgill.ca or few2001@med.cornell.edu) if you have any questions or suggestions.
 

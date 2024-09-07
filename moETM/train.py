@@ -572,9 +572,18 @@ def Train_moETM(trainer, Total_epoch, train_num, batch_size, Train_set, Test_set
             test_adate.obsm.update(embed)
             Result = evaluate(adata=test_adate, n_epoch=epoch, return_fig=True, **Eval_kwargs)
             tend = time.time()
-            print('epoch=%d, Time=%.4f, Cell_ARI=%.4f, Cell_NMI=%.4f, Cell_ASW=%.4f, Cell_ASW2=%.4f, Batch_KBET=%.4f, Batch_ASW=%.4f, Batch_GC=%.4f, Batch_ebm=%.4f' % (
-                epoch, tend-tstart, Result['ari'], Result['nmi'], Result['asw'], Result['asw_2'], Result['k_bet'], Result['batch_asw'], Result['batch_graph_score'], Result['ebm']))
-
+            #print('epoch=%d, Time=%.4f, Cell_ARI=%.4f, Cell_NMI=%.4f, Cell_ASW=%.4f, Cell_ASW2=%.4f, Batch_KBET=%.4f, Batch_ASW=%.4f, Batch_GC=%.4f, Batch_ebm=%.4f' % (
+            #    epoch, tend-tstart, Result['ari'], Result['nmi'], Result['asw'], Result['asw_2'], Result['k_bet'], Result['batch_asw'], Result['batch_graph_score'], Result['ebm']))
+            print('epoch=%d, Time=%.4f, Cell_ARI=%s, Cell_NMI=%s, Cell_ASW=%s, Cell_ASW2=%s, Batch_KBET=%s, Batch_ASW=%s, Batch_GC=%s, Batch_ebm=%s' % 
+                  (epoch, tend - tstart, 
+                   'None' if Result['ari'] is None else '%.4f' % Result['ari'],
+                   'None' if Result['nmi'] is None else '%.4f' % Result['nmi'],
+                   'None' if Result['asw'] is None else '%.4f' % Result['asw'],
+                   'None' if Result['asw_2'] is None else '%.4f' % Result['asw_2'],
+                   'None' if Result['k_bet'] is None else '%.4f' % Result['k_bet'],
+                   'None' if Result['batch_asw'] is None else '%.4f' % Result['batch_asw'],
+                   'None' if Result['batch_graph_score'] is None else '%.4f' % Result['batch_graph_score'],
+                   'None' if Result['ebm'] is None else '%.4f' % Result['ebm']))
             trainer.encoder_mod1.cuda()
             trainer.encoder_mod2.cuda()
 
